@@ -26,7 +26,7 @@
 			events
 		============================== */
 
-		//モーダルウィンドウ表示クリックイベント
+		//modal window open WHEN click THE modal link
 		$(this).on('click', function(){
 			var posY      = $win.scrollTop(),
 			    winHeight = $win.height(),
@@ -51,9 +51,9 @@
 				view($cnt);
 			}
 			function view(a_elm){
-				var w = a_elm.outerWidth();
-				var h = a_elm.outerHeight();
-				var mt = (winHeight - h) / 2 + posY;
+				var w = a_elm.outerWidth(),
+				    h = a_elm.outerHeight(),
+				    mt = (winHeight - h) / 2 + posY;
 				$bg.animate({opacity: o.bgAlpha}, o.spd);
 				$modal.css('top', mt + 'px');
 				$modalInner.css({width: w, height: h}).animate({opacity: '1'}, o.spd);
@@ -61,13 +61,12 @@
 			return false;
 		});
 
-		//モーダルウィンドウ内要素変更クリックイベント
+		//modal window contents change WHEN click THE modal change link
 		$(document).on('click', '.' + o.modalChangeName, function(){
-			var $self = $(this),
-			    posY = $win.scrollTop(),
+			var posY      = $win.scrollTop(),
 			    winHeight = $win.height(),
-			    link = $self.attr('href'),
-			    hasPrefixSharp = link.match(/^#.+/i),
+			    link           = $(this).attr('href'),
+			    hasPrefixSharp = link.match(/^#.+/),
 			    $modal      = $('#' + o.modalName),
 			    $modalInner = $modal.find('#' + o.modalInnerName);
 			if(hasPrefixSharp){
@@ -78,10 +77,10 @@
 					var $cnt = $(link);
 					$modalInner.append($cnt);
 					$cnt.css({display: 'block', zIndex: '101'});
-					var w = $cnt.outerWidth();
-					var h = $cnt.outerHeight();
-					var mt = (winHeight - h) / 2 + posY;
-					$bg.animate({opacity: '.75'}, o.spd);
+					var w = $cnt.outerWidth(),
+					    h = $cnt.outerHeight(),
+					    mt = (winHeight - h) / 2 + posY;
+					$bg.animate({opacity: o.bgAlpha}, o.spd);
 					$modal.css('top', mt + 'px');
 					$modalInner.css({width: w, height: h}).animate({opacity: '1'}, o.spd);
 				});
@@ -89,7 +88,7 @@
 			return false;
 		});
 
-		//モーダルウィンドウクローズクリックイベント
+		//modal window close WHEN click THE modal bg & modal Click link
 		$(document).on('click', '#' + o.modalBgName + ', .' + o.modalCloseName, function(){
 			var $modal      = $('#' + o.modalName),
 			    $modalInner = $modal.find('#' + o.modalInnerName),
