@@ -1,8 +1,19 @@
+/*!
+ * jquery.simpleModalWindow.js
+ *
+ * @version   : 1.0.1
+ * @author    : syuji-higa
+ * @copyright : syuji-higa (https://github.com/syuji-higa)
+ * @license   : The MIT License
+ * @link      : http://deom.syuji-higa.com/javascript/jquery.simpleModalWindow/sample
+ * @modified  : 2013-08-10 21:00
+ */
+
 (function($){
 
-	$.fn.simpleModalWindow = function(option){
+	$.fn.simpleModalWindow = function(options){
 
-		// option
+		// options
 		var o = $.extend({
 			modalName:       'modal-win',
 			modalInnerName:  'modal-win-inner',
@@ -11,7 +22,7 @@
 			modalCloseName:  'modal-close',
 			spd: 500,
 			bgAlpha: .75
-		}, option);
+		}, options);
 
 		var $win  = $(window),
 		    $body = $('body'),
@@ -20,6 +31,7 @@
 		/* ==============================
 			first ran
 		============================== */
+
 		$bg.css('opacity', '0');
 
 		/* ==============================
@@ -88,7 +100,7 @@
 			return false;
 		});
 
-		//modal window close WHEN click THE modal bg & modal Click link
+		//modal window close WHEN click THE modal bg & modal close link
 		$(document).on('click', '#' + o.modalBgName + ', .' + o.modalCloseName, function(){
 			var $modal      = $('#' + o.modalName),
 			    $modalInner = $modal.find('#' + o.modalInnerName),
